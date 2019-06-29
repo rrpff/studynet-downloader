@@ -65,48 +65,4 @@ chrome.runtime.onMessage.addListener(async (request) => {
 
 chrome.browserAction.onClicked.addListener(async function(tab) {
   chrome.tabs.executeScript({ file: 'tab.js' });
-
-  // const folders = await scrapeFolders(page);
-
-  // console.log(folders);
-
-
-
-  // await downloadFoldersAsZip(folders.map(folder => {
-  //   return {
-  //
-  //   }
-  // }));
-
-  // const testoFiles = await Promise.all([
-  //   getFile("test.pdf", "29933", "231126")
-  // ]);
-
-  // const url = "https://herts.instructure.com/courses/29933/files/231126/download?download_frd=1";
-  // const res = await fetch(url);
-  // const blob = await res.blob();
-  //
-  // await downloadFoldersAsZip([{
-  //   name: "testo",
-  //   files: testoFiles
-  // }])
-
-  // // chrome.downloads.download({
-  // //   url: window.URL.createObjectURL(new Blob([blob], { type: "application/pdf" })),
-  // //   filename: "module.pdf"
-  // // });
-  //
-  // const zip = new JSZip();
-  //
-  // zip.file("test.pdf", blob);
-  //
-  // // zip.file("test.txt", "hello world!\n");
-  //
-  // zip.generateAsync({ type: "blob" }).then((zipBlob) => {
-  //   console.log(zipBlob);
-  //
-  //   const zipUrl = window.URL.createObjectURL(zipBlob);
-  //   // chrome.downloads.download({ url: zipUrl, filename: "module.zip", saveAs: true });
-  //   chrome.downloads.download({ url: zipUrl, filename: "module.zip" });
-  // });
 });
