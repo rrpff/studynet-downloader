@@ -1,0 +1,18 @@
+{
+  "name": "Studynet Downloader",
+  "description": "Download Studynet module",
+  "version": "1.0",
+  "manifest_version": 2,
+  "browser_action": {
+    "default_title": "Studynet: Download module"
+  },
+  "permissions": [
+    "activeTab",
+    "http://*/",
+    "https://*/",
+    "downloads"
+  ],
+  "background": {
+    "scripts": ["script.js"]
+  }
+}
