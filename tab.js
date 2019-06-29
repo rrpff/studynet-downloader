@@ -1,6 +1,7 @@
 // const port = chrome.runtime.connect();
 
 const scrapeFolders = async (page) => {
+  const courseName = document.querySelector("nav a[href^='/courses']").innerText;
   const courseId = page.location.pathname.split("/")[2];
   const sections = Array.from(page.document.querySelectorAll(".context_module"))
     .filter(section => section.querySelectorAll(".attachment").length > 0);
@@ -17,6 +18,7 @@ const scrapeFolders = async (page) => {
       }))
 
     return {
+      courseName: courseName,
       name: `${index + 1} - ${section.querySelector(".name").innerText}`,
       files: files
     }

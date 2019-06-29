@@ -25,6 +25,13 @@ const getFile = async (name, courseId, fileId) => {
 const downloadFoldersAsZip = async (folders) => {
   const zip = new JSZip();
 
+  if (folders.length === 0) {
+    alert("nothing to download!");
+    return;
+  }
+
+  const courseName = folders[0].courseName;
+
   folders.forEach(folder => {
     const zipFolder = zip.folder(folder.name);
     folder.files.forEach(file => {
@@ -34,7 +41,7 @@ const downloadFoldersAsZip = async (folders) => {
 
   zip.generateAsync({ type: "blob" }).then((zipBlob) => {
     const zipUrl = window.URL.createObjectURL(zipBlob);
-    chrome.downloads.download({ url: zipUrl, filename: "module.zip", saveAs: true });
+    chrome.downloads.download({ url: zipUrl, filename: `${encodeURIComponent(courseName)}.zip`, saveAs: true });
   });
 }
 
@@ -45,6 +52,7 @@ chrome.runtime.onMessage.addListener(async (request) => {
 
   const downloadedFolders = await Promise.all(request.folders.map(async folder => {
     return {
+      courseName: folder.courseName,
       name: folder.name,
       files: await Promise.all(folder.files.map(file =>
         getFile(file.name, file.courseId, file.fileId)
