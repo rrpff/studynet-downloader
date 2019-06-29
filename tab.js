@@ -1,5 +1,3 @@
-// const port = chrome.runtime.connect();
-
 const scrapeFolders = async (page) => {
   const courseName = document.querySelector("nav a[href^='/courses']").innerText;
   const courseId = page.location.pathname.split("/")[2];
@@ -29,7 +27,6 @@ window.addEventListener("message", function(event) {
   if (event.source != window) return;
 
   if (event.data.type && (event.data.type == "FOUND_MODULE_FOLDERS")) {
-    // port.postMessage(event.data);
     chrome.runtime.sendMessage({ type: event.data.type, folders: event.data.folders });
   }
 }, false);
