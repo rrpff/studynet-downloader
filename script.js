@@ -40,7 +40,7 @@ const addObjectToZip = async (zip, root, object) => {
 chrome.runtime.onMessage.addListener(async (request) => {
   if (request.type !== "FOUND_MODULE_FOLDERS") return;
 
-  // chrome.browserAction.setBadgeText({ text: "DL" });
+  chrome.browserAction.setBadgeText({ text: "DL" });
 
   if (request.folders.length === 0) {
     alert("Nothing to download.");
@@ -59,11 +59,11 @@ chrome.runtime.onMessage.addListener(async (request) => {
   zip.generateAsync({ type: "blob" }).then((zipBlob) => {
     const zipUrl = window.URL.createObjectURL(zipBlob);
     chrome.downloads.download({ url: zipUrl, filename: `${encodeURIComponent(courseName)}.zip`, saveAs: true });
-    // chrome.browserAction.setBadgeText({ text: "" });
+    chrome.browserAction.setBadgeText({ text: "" });
   });
 });
 
 chrome.browserAction.onClicked.addListener(async function(tab) {
-  // chrome.browserAction.setBadgeText({ text: "..." });
+  chrome.browserAction.setBadgeText({ text: "..." });
   chrome.tabs.executeScript({ file: 'tab.js' });
 });
